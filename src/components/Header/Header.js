@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import GoogleAuth from '../GoogleAuth'
 import './Header.css'
 
 function Header() {
@@ -9,12 +10,10 @@ function Header() {
                 Streamy
             </Link>
             <div className="header-nav">
-                <Link to="/" className="header-nav-item">
+                <Link to="/" id="header-all-streams" className="header-nav-item">
                     All Streams
                 </Link>
-                <Link to="/" className="header-nav-item">
-                    
-                </Link>
+                <GoogleAuth />
             </div>
         </div>
     )
