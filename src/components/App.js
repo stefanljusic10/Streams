@@ -5,13 +5,14 @@ import StreamCreate from './streams/StreamCreate'
 import StreamEdit from './streams/StreamEdit'
 import StreamDelete from './streams/StreamDelete'
 import StreamShow from './streams/StreamShow'
+import Header from './Header/Header'
 
 function App() {
   return (
     <div>
       <Router>
-        App Streams repo
-        <Route exact path="/">
+        <Header />
+        <Route path="/" exact>
           <StreamList />
         </Route>
         <Route path="/streams/create">
