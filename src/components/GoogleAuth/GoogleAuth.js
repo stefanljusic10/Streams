@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './GoogleAuth.css'
 
 function GoogleAuth() {
 
@@ -20,11 +21,19 @@ function GoogleAuth() {
         })
     }, [])
 
-    const renderAuthButton = 
-        isSignedIn === null ? 
-        <div>Idk</div> : 
-        isSignedIn ? 
-        <div>Yes</div> : <div>No</div>
+    const onSignIn = () => {
+        window.gapi.auth2.getAuthInstance().signIn()
+    }
+
+    const onSignOut = () => {
+        window.gapi.auth2.getAuthInstance().signOut()
+    }
+
+    const renderAuthButton =
+        isSignedIn === null ?
+            null : isSignedIn ?
+                <button onClick={() => onSignOut()} className="googleSingBtn">Sign Out</button> :
+                <button onClick={() => onSignIn()} className="googleSingBtn">Sign In with Google</button>
 
     return (
         <div className="header-nav-item">
