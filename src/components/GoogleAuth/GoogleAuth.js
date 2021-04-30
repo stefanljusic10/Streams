@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signInAction } from '../../redux/actions/signInAction'
 import { signOutAction } from '../../redux/actions/signOutAction'
 import './GoogleAuth.css'
 
 function GoogleAuth() {
 
-    const [isSignedIn, setIsSignedIn] = useState(null)
+    // const [isSignedIn, setIsSignedIn] = useState(null)
     const dispatch = useDispatch()
+    const isSignedIn = useSelector(state => state.auth)
+    console.log(isSignedIn.isSignedIn);
 
     useEffect(() => {
         window.gapi.load('client:auth2', () => {
@@ -17,18 +19,20 @@ function GoogleAuth() {
             })
                 .then(() => {
                     const auth = window.gapi.auth2.getAuthInstance()
-                    setIsSignedIn(auth.isSignedIn.get())
-                    auth.isSignedIn.listen(isSignedIn => {
-                        if(isSignedIn){
-                            dispatch(signInAction())
-                        }
-                        else {
-                            dispatch(signOutAction())
-                        }
-                    })
+                    onAuthChange(auth.isSignedIn.get())
+                    auth.isSignedIn.listen(() => onAuthChange(isSignedIn.isSignedIn))
                 })
         })
     }, [])
+
+    const onAuthChange = isSignedIn => {
+        if (isSignedIn) {
+            dispatch(signInAction())
+        }
+        else {
+            dispatch(signOutAction())
+        }
+    }
 
     const onSignInClick = () => {
         const auth = window.gapi.auth2.getAuthInstance()
@@ -41,8 +45,8 @@ function GoogleAuth() {
     }
 
     const renderAuthButton =
-        isSignedIn === null ?
-            null : isSignedIn ?
+        isSignedIn.isSignedIn === null ?
+            null : isSignedIn.isSignedIn ?
                 <button onClick={() => onSignOutClick()} className="googleSingBtn">Sign Out</button> :
                 <button onClick={() => onSignInClick()} className="googleSingBtn">Sign In with Google</button>
 
