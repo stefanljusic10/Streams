@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { signInAction } from '../../redux/actions/signInAction'
+import { signOutAction } from '../../redux/actions/signOutAction'
 import './GoogleAuth.css'
 
 function GoogleAuth() {
 
     const [isSignedIn, setIsSignedIn] = useState(null)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         window.gapi.load('client:auth2', () => {
@@ -14,8 +18,13 @@ function GoogleAuth() {
                 .then(() => {
                     const auth = window.gapi.auth2.getAuthInstance()
                     setIsSignedIn(auth.isSignedIn.get())
-                    auth.isSignedIn.listen(() => {
-                        setIsSignedIn(auth.isSignedIn.get())
+                    auth.isSignedIn.listen(isSignedIn => {
+                        if(isSignedIn){
+                            dispatch(signInAction())
+                        }
+                        else {
+                            dispatch(signOutAction())
+                        }
                     })
                 })
         })
