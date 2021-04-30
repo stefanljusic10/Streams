@@ -21,19 +21,19 @@ function GoogleAuth() {
         })
     }, [])
 
-    const onSignIn = () => {
+    const onSignInClick = () => {
         window.gapi.auth2.getAuthInstance().signIn()
     }
 
-    const onSignOut = () => {
+    const onSignOutClick = () => {
         window.gapi.auth2.getAuthInstance().signOut()
     }
 
     const renderAuthButton =
         isSignedIn === null ?
             null : isSignedIn ?
-                <button onClick={() => onSignOut()} className="googleSingBtn">Sign Out</button> :
-                <button onClick={() => onSignIn()} className="googleSingBtn">Sign In with Google</button>
+                <button onClick={() => onSignOutClick()} className="googleSingBtn">Sign Out</button> :
+                <button onClick={() => onSignInClick()} className="googleSingBtn">Sign In with Google</button>
 
     return (
         <div className="header-nav-item">
