@@ -22,11 +22,13 @@ function GoogleAuth() {
     }, [])
 
     const onSignInClick = () => {
-        window.gapi.auth2.getAuthInstance().signIn()
+        const auth = window.gapi.auth2.getAuthInstance()
+        auth.signIn()
     }
 
     const onSignOutClick = () => {
-        window.gapi.auth2.getAuthInstance().signOut()
+        const auth = window.gapi.auth2.getAuthInstance()
+        auth.signOut()
     }
 
     const renderAuthButton =
