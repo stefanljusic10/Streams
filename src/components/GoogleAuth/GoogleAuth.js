@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInAction } from '../../redux/actions/signInAction'
 import { signOutAction } from '../../redux/actions/signOutAction'
@@ -6,7 +6,6 @@ import './GoogleAuth.css'
 
 function GoogleAuth() {
 
-    // const [isSignedIn, setIsSignedIn] = useState(null)
     const dispatch = useDispatch()
     const isSignedIn = useSelector(state => state.auth)
     console.log(isSignedIn.isSignedIn);
@@ -44,15 +43,17 @@ function GoogleAuth() {
         auth.signOut()
     }
 
-    const renderAuthButton =
-        isSignedIn.isSignedIn === null ?
-            null : isSignedIn.isSignedIn ?
-                <button onClick={() => onSignOutClick()} className="googleSingBtn">Sign Out</button> :
-                <button onClick={() => onSignInClick()} className="googleSingBtn">Sign In with Google</button>
+    const RenderAuthButton = ({ isSignedIn }) => {
+        if (isSignedIn === null)
+            return null
+        else if (isSignedIn)
+            return <button onClick={() => onSignOutClick()} className="googleSingBtn">Sign Out</button>
+        else return <button onClick={() => onSignInClick()} className="googleSingBtn">Sign In with Google</button>
+    }
 
     return (
         <div className="header-nav-item">
-            {renderAuthButton}
+            <RenderAuthButton isSignedIn={isSignedIn.isSignedIn} />
         </div>
     )
 }
