@@ -30,8 +30,10 @@ function StreamCreate() {
     const formik = useFormik({
         initialValues,
         onSubmit,
-        validete
+        validate
     })
+
+    console.log(formik.errors);
 
     return (
         <div>
@@ -42,6 +44,7 @@ function StreamCreate() {
                     onChange={formik.handleChange}
                     value={formik.values.title}
                 />
+                {formik.errors.title ? <div className="form-error">{formik.errors.title}</div> : null}
                 <br/><br/>
                 <textarea
                     type="text" name="description" placeholder="Description"
@@ -50,6 +53,7 @@ function StreamCreate() {
                     onChange={formik.handleChange}
                     value={formik.values.description}
                 />
+                {formik.errors.description ? <div className="form-error">{formik.errors.description}</div> : null}
                 <br/><br/>
                 <button type="submit">Create new Stream</button>
             </form>
