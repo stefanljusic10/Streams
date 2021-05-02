@@ -1,0 +1,24 @@
+.form-formik{
+    margin: 10vh auto;
+    width: 30vw
+}
+
+.input-field[type='text']{
+    width: 100%;
+    padding: 2%;
+    border: 2px solid darkslateblue;
+    border-radius: 1.2rem;
+}
+
+.input-field[type='text']:focus{
+    outline: none;
+}
+
+button[type='submit']{
+    width: 40%;
+    background-color: darkslateblue;
+    color: white;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2%;
+}
