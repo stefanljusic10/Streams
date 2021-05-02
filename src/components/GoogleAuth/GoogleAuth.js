@@ -26,7 +26,7 @@ function GoogleAuth() {
 
     const onAuthChange = isSignedIn => {
         if (isSignedIn) {
-            dispatch(signInAction())
+            dispatch(signInAction(window.gapi.auth2.getAuthInstance().currentUser.get().getId()))
         }
         else {
             dispatch(signOutAction())

@@ -1,5 +1,6 @@
-export const signInAction = () => {
+export const signInAction = (userId) => {
     return{
-        type: 'SIGN_IN_ACTION'
+        type: 'SIGN_IN_ACTION',
+        payload: userId
     }
 }
