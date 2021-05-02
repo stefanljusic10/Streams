@@ -3,14 +3,14 @@
     width: 30vw
 }
 
-.input-field[type='text']{
+.input-field{
     width: 100%;
     padding: 2%;
-    border: 2px solid darkslateblue;
+    border: 0.15rem solid darkslateblue;
     border-radius: 1.2rem;
 }
 
-.input-field[type='text']:focus{
+.input-field:focus{
     outline: none;
 }
 
