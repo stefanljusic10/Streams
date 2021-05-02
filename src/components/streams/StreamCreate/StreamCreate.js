@@ -4,14 +4,33 @@ import './StreamCreate.css'
 
 function StreamCreate() {
 
-    const formik = useFormik({
-        initialValues: {
-            title: '',
-            description: ''
-        },
-        onSubmit: values => {
-            console.log(values);
+    const initialValues = {
+        title: '',
+        description: ''
+    }
+
+    const onSubmit = values => {
+        console.log(values);
+    }
+
+    const validate = values => {
+        let errors = {}
+
+        if(!values.title){
+            errors.title = 'Required!'
         }
+
+        if(!values.description){
+            errors.description = 'Required!'
+        }
+
+        return errors
+    }
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit,
+        validete
     })
 
     return (
