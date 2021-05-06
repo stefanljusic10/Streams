@@ -1,9 +1,15 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { submitFormAction } from '../../../redux/actions/submitFormAction'
 import './StreamCreate.css'
 
 function StreamCreate() {
+
+    const dispatch = useDispatch()
+    const form = useSelector(state => state.form)
+    console.log(form);
 
     const initialValues = {
         title: '',
@@ -11,7 +17,7 @@ function StreamCreate() {
     }
 
     const onSubmit = values => {
-        console.log(values);
+        dispatch(submitFormAction(values))
     }
 
     const validationSchema = Yup.object({
