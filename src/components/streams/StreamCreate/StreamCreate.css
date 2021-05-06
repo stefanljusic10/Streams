@@ -1,6 +1,7 @@
 .form-formik{
     margin: 10vh auto;
-    width: 30vw
+    width: 40vw;
+    font-size: 1.2rem;
 }
 
 .input-field{
